@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,7 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/bg.png'),
           fit: BoxFit.cover,
@@ -25,9 +26,11 @@ class HomePage extends StatelessWidget {
                   top: MediaQuery.of(context).size.height * 0.2,
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Hello, Przemyslaw!',
+                      AppLocalizations.of(context)!.home_greetings,
                       style: TextStyle(
                         color: Color(0xff150C2C),
                         fontSize: 24,
@@ -37,10 +40,10 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'choose your currency',
+                      AppLocalizations.of(context)!.choose,
                       style: TextStyle(
                         color: Color(0xff6881C0),
-                        fontSize: 24,
+                        fontSize: 26,
                         fontWeight: FontWeight.w900,
                         fontFamily:
                             GoogleFonts.ibmPlexSansDevanagari().fontFamily,
