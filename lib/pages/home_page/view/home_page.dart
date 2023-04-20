@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:kantor_euvic/pages/currency_info_page/currency_info_page.dart';
 import 'package:kantor_euvic/pages/home_page/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -54,10 +55,15 @@ class HomePage extends StatelessWidget {
                   top: MediaQuery.of(context).size.height * 0.2,
                 ),
               ),
-              const Align(
+              Align(
                 alignment: Alignment.center,
-                child: MainButton(
-                  buttonText: 'USD',
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder:(context) => const CurrencyInfoPage(),));
+                  },
+                  child: const MainButton(
+                    buttonText: 'USD',
+                  ),
                 ),
               ),
               Padding(
