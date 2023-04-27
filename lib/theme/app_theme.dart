@@ -14,9 +14,15 @@ class AppTheme {
           letterSpacing: 4,
         ),
         headlineLarge: TextStyle(
-          color: AppColors.blue,
-          fontSize: 44,
+          color: Colors.black,
+          fontSize: 36,
+          letterSpacing: 5,
           fontWeight: FontWeight.w900,
+        ),
+        bodySmall: const TextStyle(
+          color: Colors.black,
+          fontSize: 24,
+          fontWeight: FontWeight.w400,
         )
       )
     );

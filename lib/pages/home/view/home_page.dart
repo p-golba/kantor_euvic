@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.2,
+                  top: MediaQuery.of(context).size.height * 0.1,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,37 +49,35 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.2,
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => CurrencyPage(
-                          currencyCode: 'usd',
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => CurrencyPage(
+                                currencyCode: 'usd',
+                              ),
+                            ),
+                          );
+                        },
+                        child: MainButton(
+                          buttonText: 'USD',
                         ),
                       ),
-                    );
-                  },
-                  child: MainButton(
-                    buttonText: 'USD',
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.03,
+                        ),
+                      ),
+                      MainButton(
+                        buttonText: 'EUR',
+                      ),
+                    ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.03,
-                ),
-              ),
-              const Align(
-                alignment: Alignment.center,
-                child: MainButton(
-                  buttonText: 'EUR',
                 ),
               ),
             ],

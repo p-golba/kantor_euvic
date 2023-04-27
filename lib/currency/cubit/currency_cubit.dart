@@ -23,7 +23,7 @@ class CurrencyCubit extends Cubit<CurrencyState> {
       emit(
         state.copyWith(
           status: CurrencyStatus.success,
-          currencyInfo: currencyInfo,
+          currencyInfo: currencyInfo.reversed.toList(),
         ),
       );
     } on Exception {
