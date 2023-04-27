@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:kantor_euvic/pages/currency_info_page/currency_info_page.dart';
-import 'package:kantor_euvic/pages/home_page/widgets/widgets.dart';
+import 'package:kantor_euvic/pages/currency_info/view/currency_page.dart';
+import 'package:kantor_euvic/pages/home/widgets/widgets.dart';
+import 'package:kantor_euvic/theme/app_colors.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,21 +32,19 @@ class HomePage extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.home_greetings,
-                      style: const TextStyle(
-                        color: Color(0xff150C2C),
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        height: 1.0
-                      ),
+                      style: TextStyle(
+                          color: AppColors.purple,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          height: 1.0),
                     ),
                     Text(
                       AppLocalizations.of(context)!.choose,
-                      style: const TextStyle(
-                        color: Color(0xff6881C0),
-                        fontSize: 26,
-                        fontWeight: FontWeight.w900,
-                        height: 1.0
-                      ),
+                      style: TextStyle(
+                          color: AppColors.blue,
+                          fontSize: 26,
+                          fontWeight: FontWeight.w900,
+                          height: 1.0),
                     ),
                   ],
                 ),
@@ -59,9 +58,15 @@ class HomePage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder:(context) => const CurrencyInfoPage(),));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CurrencyPage(
+                          currencyCode: 'usd',
+                        ),
+                      ),
+                    );
                   },
-                  child: const MainButton(
+                  child: MainButton(
                     buttonText: 'USD',
                   ),
                 ),

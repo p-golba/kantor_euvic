@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kantor_euvic/theme/app_colors.dart';
 
 class MainButton extends StatelessWidget {
   final String buttonText;
@@ -15,7 +16,7 @@ class MainButton extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.065,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: const Color(0xff6881C0),
+          color: AppColors.blue,
           boxShadow: const [
             BoxShadow(
               offset: Offset(0, 4),

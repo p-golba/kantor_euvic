@@ -14,10 +14,20 @@ extension CurrencyStatusX on CurrencyStatus {
 
 class CurrencyState {
   final CurrencyStatus status;
-  final List<Currency>? currencyInfo;
+  final List<Currency> currencyInfo;
 
   CurrencyState({
     this.status = CurrencyStatus.initial,
-    this.currencyInfo = const [],
-  });
+    List<Currency>? currencyInfo,
+  }) : currencyInfo = currencyInfo ?? const [];
+
+  CurrencyState copyWith({
+    CurrencyStatus? status,
+    List<Currency>? currencyInfo,
+  }) {
+    return CurrencyState(
+      status: status ?? this.status,
+      currencyInfo: currencyInfo ?? this.currencyInfo,
+    );
+  }
 }
