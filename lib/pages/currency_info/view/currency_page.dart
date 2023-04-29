@@ -33,22 +33,28 @@ class CurrencyPage extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: SafeArea(
-              child: BlocBuilder<CurrencyCubit, CurrencyState>(
-                builder: (context, state) {
-                  switch (state.status) {
-                    case CurrencyStatus.failure:
-                      return Center();
-                    case CurrencyStatus.success:
-                      return CurrencyPopulated(
-                        currencyList: state.currencyInfo,
-                      );
-                    case CurrencyStatus.loading:
-                      return Center();
-                    case CurrencyStatus.initial:
-                      context.read<CurrencyCubit>().fetchCurrency('eur');
-                      return Center();
-                  }
-                },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20,
+                  horizontal: 35,
+                ),
+                child: BlocBuilder<CurrencyCubit, CurrencyState>(
+                  builder: (context, state) {
+                    switch (state.status) {
+                      case CurrencyStatus.failure:
+                        return Center();
+                      case CurrencyStatus.success:
+                        return CurrencyPopulated(
+                          currencyList: state.currencyInfo,
+                        );
+                      case CurrencyStatus.loading:
+                        return Center();
+                      case CurrencyStatus.initial:
+                        context.read<CurrencyCubit>().fetchCurrency('usd');
+                        return Center();
+                    }
+                  },
+                ),
               ),
             ),
           ),

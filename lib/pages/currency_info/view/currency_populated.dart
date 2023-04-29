@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:kantor_euvic/pages/currency_info/widgets/action_button.dart';
+import 'package:kantor_euvic/pages/currency_info/widgets/currency_bottom_sheet.dart';
 import 'package:kantor_euvic/theme/app_colors.dart';
 import 'package:kantor_euvic/web_api/models/currency.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,126 +15,127 @@ class CurrencyPopulated extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Color checkIfHigherOrLower(double mid) {
-    if (mid > currencyList.first.mid) return AppColors.green;
-    if (mid < currencyList.first.mid) return AppColors.red;
+  double angleBasedOnValue(double mid) {
+    if (mid > currencyList.first.mid.to2DecimalPlaces) return -pi / 2;
+    if (mid < currencyList.first.mid.to2DecimalPlaces) return pi / 2;
+    return 0.0;
+  }
+
+  Color colorBasedOnValue(double mid) {
+    if (mid > currencyList.first.mid.to2DecimalPlaces) return AppColors.green;
+    if (mid < currencyList.first.mid.to2DecimalPlaces) return AppColors.red;
     return AppColors.blue;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 35,
-        vertical: 20,
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  width: MediaQuery.of(context).size.width * 0.1,
-                  decoration: BoxDecoration(
-                    color: AppColors.yellow,
-                    border: Border.all(color: AppColors.blue, width: 1),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_back_ios_rounded,
-                  ),
-                ),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ActionButton(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              border: null,
+              icon: const Icon(
+                Icons.keyboard_arrow_left,
               ),
-              Text(
-                'Dollar'.toUpperCase(),
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  width: MediaQuery.of(context).size.width * 0.1,
-                  decoration: BoxDecoration(
-                    color: AppColors.yellow,
-                    border: Border.all(color: AppColors.blue, width: 1),
-                    borderRadius: BorderRadius.circular(15),
+            ),
+            Text(
+              'Dollar'.toUpperCase(),
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            ActionButton(
+              onTap: () {
+                Scaffold.of(context).showBottomSheet(
+                  (context) => CurrencyBottomSheet(
+                    currencyList: currencyList,
                   ),
-                  child: const Icon(
-                    Icons.bar_chart,
-                  ),
-                ),
+                );
+              },
+              border: Border.all(
+                color: AppColors.blue,
               ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 40),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                currencyList.first.effectiveDate,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w700,
+              icon: const Icon(
+                Icons.show_chart,
+              ),
+            ),
+          ],
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 40),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              currencyList.first.effectiveDate,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+            Text(
+              currencyList.first.mid.toStringAsFixed(2),
+              style: TextStyle(
+                color: AppColors.blue,
+                fontWeight: FontWeight.w700,
+                fontSize: 64,
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: currencyList.length,
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                return SizedBox();
+              }
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    currencyList[index].effectiveDate,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Transform.rotate(
+                    angle: angleBasedOnValue(
+                      currencyList[index].mid.to2DecimalPlaces,
                     ),
-              ),
-              Text(
-                currencyList.first.mid.toStringAsFixed(2),
-                style: TextStyle(
-                  color: AppColors.blue,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 64,
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: currencyList.length,
-              itemBuilder: (context, index) {
-                if(index == 0) {
-                  return SizedBox();
-                }
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      currencyList[index].effectiveDate,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    Stack(
+                    child: Stack(
                       children: [
                         SvgPicture.asset(
                           'assets/triangle_color.svg',
-                          color: checkIfHigherOrLower(
-                            currencyList[index].mid,
+                          color: colorBasedOnValue(
+                            currencyList[index].mid.to2DecimalPlaces,
                           ),
                         ),
                         SvgPicture.asset('assets/triangle_border.svg'),
                       ],
                     ),
-                    Text(
-                      currencyList[index].mid.toStringAsFixed(2),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: checkIfHigherOrLower(currencyList[index].mid),
-                        fontSize: 36,
+                  ),
+                  Text(
+                    currencyList[index].mid.toStringAsFixed(2),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: colorBasedOnValue(
+                        currencyList[index].mid.to2DecimalPlaces,
                       ),
-                    )
-                  ],
-                );
-              },
-            ),
-          )
-        ],
-      ),
+                      fontSize: 36,
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+        )
+      ],
     );
   }
+}
+
+extension on double {
+  double get to2DecimalPlaces => ((this * 100.0).round().toDouble() / 100.0);
 }
