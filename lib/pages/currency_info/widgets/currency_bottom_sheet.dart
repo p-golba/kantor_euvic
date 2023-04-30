@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kantor_euvic/theme/app_colors.dart';
 import 'package:kantor_euvic/web_api/models/currency.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CurrencyBottomSheet extends StatelessWidget {
   final List<Currency> currencyList;
@@ -39,7 +40,7 @@ class CurrencyBottomSheet extends StatelessWidget {
                 ),
               ),
               Text(
-                'Wykres'.toUpperCase(),
+                AppLocalizations.of(context)!.ratesChart.toUpperCase(),
                 style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,

@@ -45,10 +45,11 @@ class CurrencyPage extends StatelessWidget {
                         return const CurrencyFailure();
                       case CurrencyStatus.success:
                         return CurrencyPopulated(
+                          currencyCode: currencyCode,
                           currencyList: state.currencyInfo,
                         );
                       case CurrencyStatus.initial:
-                        context.read<CurrencyCubit>().fetchCurrency('uwas');
+                        context.read<CurrencyCubit>().fetchCurrency(currencyCode);
                         return const CurrencyLoading();
                     }
                   },

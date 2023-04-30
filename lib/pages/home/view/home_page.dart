@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                       AppLocalizations.of(context)!.home_greetings,
                       style: TextStyle(
                         color: AppColors.purple,
-                        fontSize: 24,
+                        fontSize: 28,
                         fontWeight: FontWeight.w700,
                         height: 1.0,
                       ),
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                       AppLocalizations.of(context)!.choose,
                       style: TextStyle(
                         color: AppColors.blue,
-                        fontSize: 26,
+                        fontSize: 30,
                         fontWeight: FontWeight.w900,
                         height: 1.0,
                       ),
@@ -60,8 +60,9 @@ class HomePage extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const CurrencyPage(currencyCode: 'usd'),
+                              builder: (context) => const CurrencyPage(
+                                currencyCode: 'usd',
+                              ),
                             ),
                           );
                         },
@@ -76,8 +77,9 @@ class HomePage extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const CurrencyPage(currencyCode: 'eur'),
+                              builder: (context) => const CurrencyPage(
+                                currencyCode: 'eur',
+                              ),
                             ),
                           );
                         },

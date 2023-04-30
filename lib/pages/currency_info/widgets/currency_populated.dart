@@ -1,16 +1,19 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kantor_euvic/pages/currency_info/widgets/action_button.dart';
 import 'package:kantor_euvic/pages/currency_info/widgets/currency_bottom_sheet.dart';
 import 'package:kantor_euvic/theme/app_colors.dart';
 import 'package:kantor_euvic/web_api/models/currency.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CurrencyPopulated extends StatelessWidget {
+  final String currencyCode;
   final List<Currency> currencyList;
 
   const CurrencyPopulated({
+    required this.currencyCode,
     required this.currencyList,
     Key? key,
   }) : super(key: key);
@@ -44,7 +47,9 @@ class CurrencyPopulated extends StatelessWidget {
               ),
             ),
             Text(
-              'Dollar'.toUpperCase(),
+              currencyCode == 'usd'
+                  ? AppLocalizations.of(context)!.dollar.toUpperCase()
+                  : AppLocalizations.of(context)!.euro.toUpperCase(),
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             ActionButton(
@@ -91,7 +96,7 @@ class CurrencyPopulated extends StatelessWidget {
             itemCount: currencyList.length,
             itemBuilder: (context, index) {
               if (index == 0) {
-                return SizedBox();
+                return const SizedBox();
               }
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

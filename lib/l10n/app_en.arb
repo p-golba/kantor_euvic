@@ -1,4 +1,8 @@
 {
     "home_greetings": "Hello, Trader!",
-    "choose": "choose your currency"
+    "choose": "choose your currency",
+    "ratesChart": "Last exchange rates",
+    "dollar": "Dollar",
+    "euro": "Euro",
+    "errorMessage": "There was an error, please try again."
 }

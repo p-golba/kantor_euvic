@@ -13,7 +13,7 @@ class AppTheme {
           fontSize: 32,
           letterSpacing: 4,
         ),
-        headlineLarge: TextStyle(
+        headlineLarge: const TextStyle(
           color: Colors.black,
           fontSize: 36,
           letterSpacing: 5,
