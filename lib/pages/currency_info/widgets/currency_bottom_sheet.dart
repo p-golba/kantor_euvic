@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:kantor_euvic/theme/app_colors.dart';
 import 'package:kantor_euvic/web_api/models/currency.dart';
@@ -16,7 +14,7 @@ class CurrencyBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: MediaQuery.of(context).size.height * 0.5,
       decoration: BoxDecoration(
         color: AppColors.blue,
         borderRadius: const BorderRadius.vertical(
@@ -25,9 +23,12 @@ class CurrencyBottomSheet extends StatelessWidget {
       ),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(
+            vertical: 15,
+            horizontal: 10,
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 height: 5,
@@ -37,18 +38,17 @@ class CurrencyBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
               ),
+              Text(
+                'Wykres'.toUpperCase(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                  letterSpacing: 4,
+                ),
+              ),
               SizedBox(
-                height: 300,
+                height: MediaQuery.of(context).size.height * 0.35,
                 child: SfCartesianChart(
-                  title: ChartTitle(
-                    text: "Wykres".toUpperCase(),
-                    textStyle: TextStyle(
-                      color: AppColors.purple,
-                      letterSpacing: 4,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    )
-                  ),
                   plotAreaBorderWidth: 0,
                   primaryXAxis: CategoryAxis(
                     axisLine: const AxisLine(width: 0),

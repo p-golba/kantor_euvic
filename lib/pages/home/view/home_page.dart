@@ -33,18 +33,20 @@ class HomePage extends StatelessWidget {
                     Text(
                       AppLocalizations.of(context)!.home_greetings,
                       style: TextStyle(
-                          color: AppColors.purple,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          height: 1.0),
+                        color: AppColors.purple,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        height: 1.0,
+                      ),
                     ),
                     Text(
                       AppLocalizations.of(context)!.choose,
                       style: TextStyle(
-                          color: AppColors.blue,
-                          fontSize: 26,
-                          fontWeight: FontWeight.w900,
-                          height: 1.0),
+                        color: AppColors.blue,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w900,
+                        height: 1.0,
+                      ),
                     ),
                   ],
                 ),
@@ -54,19 +56,16 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GestureDetector(
+                      MainButton(
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => CurrencyPage(
-                                currencyCode: 'usd',
-                              ),
+                              builder: (context) =>
+                                  const CurrencyPage(currencyCode: 'usd'),
                             ),
                           );
                         },
-                        child: MainButton(
-                          buttonText: 'USD',
-                        ),
+                        buttonText: 'USD',
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -74,6 +73,14 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       MainButton(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const CurrencyPage(currencyCode: 'eur'),
+                            ),
+                          );
+                        },
                         buttonText: 'EUR',
                       ),
                     ],

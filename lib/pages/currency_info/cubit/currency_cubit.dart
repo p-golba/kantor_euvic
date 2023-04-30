@@ -10,12 +10,6 @@ class CurrencyCubit extends Cubit<CurrencyState> {
   CurrencyCubit(this._currencyRepository) : super(CurrencyState());
 
   Future<void> fetchCurrency(String countryCode) async {
-    emit(
-      state.copyWith(
-        status: CurrencyStatus.loading,
-      ),
-    );
-
     try {
       final currencyInfo = await _currencyRepository.getCurrencyInfo(
         countryCode,

@@ -6,5 +6,4 @@ class AppColors {
   static Color red = const Color(0xffF3616E);
   static Color green = const Color(0xff84D792);
   static Color purple = const Color(0xff150C2C);
-  static Color meteorite = const Color(0xff34206e);
 }

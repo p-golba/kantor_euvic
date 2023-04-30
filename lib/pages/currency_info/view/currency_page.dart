@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kantor_euvic/currency/cubit/currency_cubit.dart';
-import 'package:kantor_euvic/pages/currency_info/view/currency_populated.dart';
+import 'package:kantor_euvic/pages/currency_info/cubit/currency_cubit.dart';
+import 'package:kantor_euvic/pages/currency_info/widgets/widgets.dart';
 import 'package:kantor_euvic/web_api/repositories/currency_repository.dart';
 
 class CurrencyPage extends StatelessWidget {
@@ -42,16 +42,14 @@ class CurrencyPage extends StatelessWidget {
                   builder: (context, state) {
                     switch (state.status) {
                       case CurrencyStatus.failure:
-                        return Center();
+                        return const CurrencyFailure();
                       case CurrencyStatus.success:
                         return CurrencyPopulated(
                           currencyList: state.currencyInfo,
                         );
-                      case CurrencyStatus.loading:
-                        return Center();
                       case CurrencyStatus.initial:
-                        context.read<CurrencyCubit>().fetchCurrency('usd');
-                        return Center();
+                        context.read<CurrencyCubit>().fetchCurrency('uwas');
+                        return const CurrencyLoading();
                     }
                   },
                 ),
